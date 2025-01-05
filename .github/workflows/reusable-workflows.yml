@@ -5,7 +5,7 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - name: Install dependency
-        run: npm install
+        run: echo "npm install"
 
       - name: Code Build
         run: echo "Build is successful"
