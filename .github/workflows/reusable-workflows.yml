@@ -1,7 +1,7 @@
 name: Continuous Integration Workflow
 on: [workflow_call]
 jobs:
-  Continuous_Integration_Workflow:
+  Reusable_Workflow:
     runs-on: [self-hosted]
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
