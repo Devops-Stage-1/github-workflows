@@ -14,7 +14,8 @@ jobs:
         run:  echo "Unit test and Integration test is successful"
 
       - name: Code review
-        run : echo " Code review is successful"
+        run : /opt/sonarscanner/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonarqube.dkdevops.online:9000 -Dsonar.login=admin -Dsonar.password=Dhwarakesh007$ -Dsonar.projectKey=expense-backend
+
 
       - name: Code release
         run: echo "Code release is successful"
