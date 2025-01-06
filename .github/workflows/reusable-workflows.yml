@@ -1,5 +1,10 @@
 name: Continuous Integration Workflow
-on: [workflow_call]
+on:
+  workflow_call:
+    inputs:
+      project-key:
+        required: true
+        type: string
 jobs:
   Reusable_CI_Workflow:
     runs-on: [self-hosted]
@@ -14,8 +19,7 @@ jobs:
         run:  echo "Unit test and Integration test is successful"
 
       - name: Code review
-        run : /opt/sonarscanner/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonarqube.dkdevops.online:9000 -Dsonar.login=admin -Dsonar.password=Dhwarakesh007$ -Dsonar.projectKey=expense-backend
-
+        run : /opt/sonarscanner/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonarqube.dkdevops.online:9000 -Dsonar.login={{ sonar_login }} -Dsonar.password={{ sonar_password }} -Dsonar.projectKey=${{ inputs.project-key }}
 
       - name: Code release
         run: echo "Code release is successful"
