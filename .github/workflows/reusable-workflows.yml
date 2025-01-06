@@ -14,7 +14,7 @@ jobs:
         run:  echo "Unit test and Integration test is successful"
 
       - name: Code review
-        run : echo " Code review is successful
+        run : echo " Code review is successful"
 
       - name: Code release
         run: echo "Code release is successful"
