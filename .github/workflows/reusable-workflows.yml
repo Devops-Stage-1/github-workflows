@@ -33,7 +33,7 @@ jobs:
         run:  echo "Unit test and Integration test is successful"
 
       - name: Code review
-        run : /opt/sonarscanner/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonarqube.dkdevops.online:9000 -Dsonar.login=${{ steps.vault-secrets.outputs.sonar_login }} -Dsonar.password=${{ steps.vault-secrets.outputs.sonar_password }} -Dsonar.projectKey=${{ inputs.project-key }}
+        run : echo "/opt/sonarscanner/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonarqube.dkdevops.online:9000 -Dsonar.login=${{ steps.vault-secrets.outputs.sonar_login }} -Dsonar.password=${{ steps.vault-secrets.outputs.sonar_password }} -Dsonar.projectKey=${{ inputs.project-key }}"
 
       - name: Code release
         run: echo "Code release is successful"
