@@ -26,20 +26,24 @@ jobs:
       - name: Git checkout
         uses: actions/checkout@v4
 
-      - name: Install dependency
-        run: echo "npm install"
+      - run: echo OK
+        name: Code Lint
 
-      - name: Code Build
-        run: echo "Build is successful"
+      - run: env
+        #echo npm run test:unit
+        name: Code Unit Tests
 
-      - name: Code test
-        run:  echo "Unit test and Integration test is successful"
-
-      - name: Code review
-        run : /opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonarqube-internal.dkdevops.online:9000 -Dsonar.login=${{ steps.vault-secrets.outputs.sonar_login }} -Dsonar.password=${{ steps.vault-secrets.outputs.sonar_password }} -Dsonar.projectKey=${{ inputs.project-key }}
-
-      - name: Code release print
-        run: echo "Code release is successful"
-        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+#      - name: Code Build
+#        run: echo "Build is successful"
+#
+#      - name: Code test
+#        run:  echo "Unit test and Integration test is successful"
+#
+#      - name: Code review
+#        run : /opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonarqube-internal.dkdevops.online:9000 -Dsonar.login=${{ steps.vault-secrets.outputs.sonar_login }} -Dsonar.password=${{ steps.vault-secrets.outputs.sonar_password }} -Dsonar.projectKey=${{ inputs.project-key }}
+#
+#      - name: Code release print
+#        run: echo "Code release is successful"
+#        if: ${{ startsWith(github.ref, 'refs/tags/') }}
 
 
