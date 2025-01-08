@@ -41,9 +41,6 @@ jobs:
 #
 #      - name: Code review
 #        run : /opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonarqube-internal.dkdevops.online:9000 -Dsonar.login=${{ steps.vault-secrets.outputs.sonar_login }} -Dsonar.password=${{ steps.vault-secrets.outputs.sonar_password }} -Dsonar.projectKey=${{ inputs.project-key }}
-#
-#      - name: Code release print
-#        run: echo "Code release is successful"
-#        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+
 
 
