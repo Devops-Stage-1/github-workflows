@@ -2,7 +2,10 @@ name: Continuous Integration Workflow
 on:
   workflow_call:
     inputs:
-      project-key:
+      project_name:
+        required: true
+        type: string
+      release_archieve_file:
         required: true
         type: string
       npm_install:
@@ -23,19 +26,24 @@ jobs:
             token: ${{ secrets.vault_token }}
             tlsSkipVerify: true
             secrets: |
-              github/data/sonar sonar_login | sonar_login ;
-              github/data/sonar sonar_password | sonar_password ;
+              jfrog/data/artifactory artifactory_user | artifactory_user ;
+              jfrog/data/artifactory artifactory_password | artifactory_password ;
 
       - name: Git checkout
         uses: actions/checkout@v4
 
-      - run: echo npm install
+      - run: npm install
         name: Install NodeJS modules
         if: ${{ inputs.npm_install }}
 
-      - run: env
-        #- run: curl -v --user ${{ steps.vault-secrets.outputs.artifactory_user }}:${{ steps.vault-secrets.outputs.artifactory_password }} --data-binary @1.0.0.zip -X PUT "http://artifactory-internal.rdevops6a.online:8081/artifactory/expense-backend/1.0.0.zip"
-        name: Release Software
+      - name: Create version file
+        run: echo ${GITHUB_REF_NAME} >VERSION
+
+      - name: Prepare artifact
+        run: zip -r artifact.zip ${{inputs.release_archieve_file}}
+
+      - name: Upload artifact
+        run: curl -v --user ${{ steps.vault-secrets.outputs.artifactory_user }}:${{ steps.vault-secrets.outputs.artifactory_password }} --data-binary @artifact.zip -X PUT "http://artifactory-internal.dkdevops.online:8081/artifactory/${{ inputs.project_name }}/${GITHUB_REF_NAME}.zip"
 
 #      - name: Code release print
 #        run: echo "Code release is successful"
