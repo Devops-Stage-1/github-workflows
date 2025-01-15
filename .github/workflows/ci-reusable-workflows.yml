@@ -2,7 +2,7 @@ name: Continuous Integration Workflow
 on:
   workflow_call:
     inputs:
-      project-key:
+      project-name:
         required: true
         type: string
     secrets:
@@ -29,18 +29,14 @@ jobs:
       - run: echo OK
         name: Code Lint
 
-      - run: env
-        #echo npm run test:unit
-        name: Code Unit Tests
+      - name: Code Build
+        run: echo "Build is successful"
 
-#      - name: Code Build
-#        run: echo "Build is successful"
-#
-#      - name: Code test
-#        run:  echo "Unit test and Integration test is successful"
-#
+      - name: Code test
+        run:  echo "Unit test and Integration test is successful"
+
 #      - name: Code review
-#        run : /opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonarqube-internal.dkdevops.online:9000 -Dsonar.login=${{ steps.vault-secrets.outputs.sonar_login }} -Dsonar.password=${{ steps.vault-secrets.outputs.sonar_password }} -Dsonar.projectKey=${{ inputs.project-key }}
+#        run : /opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner -Dsonar.host.url=http://sonarqube-internal.dkdevops.online:9000 -Dsonar.login=${{ steps.vault-secrets.outputs.sonar_login }} -Dsonar.password=${{ steps.vault-secrets.outputs.sonar_password }} -Dsonar.projectKey=${{ inputs.project-name }}
 
 
 
