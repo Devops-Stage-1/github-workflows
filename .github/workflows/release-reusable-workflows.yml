@@ -45,7 +45,8 @@ jobs:
       - name: Upload artifact
         run: curl -v --user ${{ steps.vault-secrets.outputs.artifactory_user }}:${{ steps.vault-secrets.outputs.artifactory_password }} --data-binary @artifact.zip -X PUT "http://artifactory-internal.dkdevops.online:8081/artifactory/${{ inputs.project_name }}/${GITHUB_REF_NAME}.zip"
 
-      - name: |
+      - name: Trigger Gocd deployment
+        run: |
           echo '{
           "environment_variables": [
             {
